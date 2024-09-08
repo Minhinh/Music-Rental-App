@@ -1,54 +1,64 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/detailImage"
+        android:id="@+id/detail_image"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/placeholder_image" />
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/item_image"
+        android:src="@drawable/piano" />
 
     <TextView
-        android:id="@+id/detailName"
+        android:id="@+id/detail_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Item Name"
-        android:textSize="18sp"
-        android:layout_below="@id/detailImage"
-        android:layout_marginTop="8dp" />
+        android:layout_below="@id/detail_image"
+        android:layout_centerHorizontal="true"
+        android:textSize="18sp" />
+
+    <RatingBar
+        android:id="@+id/detail_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/detail_name"
+        android:layout_centerHorizontal="true"
+        android:numStars="5"
+        android:rating="0" />
 
     <TextView
-        android:id="@+id/detailAttribute"
+        android:id="@+id/detail_attribute"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Attribute"
-        android:layout_below="@id/detailName"
-        android:layout_marginTop="8dp" />
+        android:layout_below="@id/detail_rating"
+        android:layout_centerHorizontal="true"
+        android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/detailPrice"
+        android:id="@+id/detail_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Price"
-        android:layout_below="@id/detailAttribute"
-        android:layout_marginTop="8dp" />
+        android:layout_below="@id/detail_attribute"
+        android:layout_centerHorizontal="true"
+        android:textSize="16sp" />
 
     <Button
-        android:id="@+id/saveButton"
+        android:id="@+id/save_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:text="Save"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true" />
+        android:onClick="onSaveClicked" />
 
     <Button
-        android:id="@+id/cancelButton"
+        android:id="@+id/cancel_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@id/save_button"
+        android:layout_marginEnd="16dp"
         android:text="Cancel"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true" />
-
+        android:onClick="onCancelClicked" />
 </RelativeLayout>
