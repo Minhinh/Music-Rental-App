@@ -1,6 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
         android:id="@+id/item_image"
@@ -12,6 +13,7 @@
 
     <TextView
         android:id="@+id/item_name"
+        style="@style/HeaderTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/item_image"
@@ -37,6 +39,7 @@
 
     <TextView
         android:id="@+id/item_price"
+        style="@style/TextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/item_attribute"
@@ -60,4 +63,20 @@
         android:layout_centerHorizontal="true"
         android:text="Next"
         android:onClick="onNextClicked" />
+    <!-- This is a comment -->
+    <SeekBar
+        android:id="@+id/item_rating_seekbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:max="10"
+        android:progress="5" />
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/item_attribute_chipgroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:singleLine="false"
+        app:selectionRequired="false"
+        app:singleSelection="false"
+        android:layout_marginTop="16dp" />
 </RelativeLayout>
