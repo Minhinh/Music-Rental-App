@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Assignment_2_MusicStudio</string>
     <string name="item_image">Image Product</string>
+    <string name="borrow">Borrow</string>
+    <string name="next">Next</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
 </resources>
