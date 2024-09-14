@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Register ActivityResultLauncher for DetailActivity
+        // Register ActivityResultLauncher for DetailActivity for no depreciated
         detailActivityLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) { result ->

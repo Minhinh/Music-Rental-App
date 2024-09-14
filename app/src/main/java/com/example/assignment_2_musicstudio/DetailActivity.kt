@@ -20,7 +20,8 @@ class DetailActivity : AppCompatActivity() {
 
         Log.i(TAG, "DetailActivity started")
 
-        val item: Item? = intent.getParcelableExtra("item_key")
+        // Use getParcelableExtra with type argument for no depreciated
+        val item: Item? = intent.getParcelableExtra("item_key", Item::class.java)
 
         item?.let {
             findViewById<ImageView>(R.id.detail_image).setImageResource(it.imageResId)
