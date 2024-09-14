@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
-import android.widget.SeekBar
+import android.widget.RatingBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
@@ -20,14 +20,13 @@ class DetailActivity : AppCompatActivity() {
 
         Log.i(TAG, "DetailActivity started")
 
-        // Use getParcelableExtra with type argument for no depreciated
         val item: Item? = intent.getParcelableExtra("item_key", Item::class.java)
 
         item?.let {
             findViewById<ImageView>(R.id.detail_image).setImageResource(it.imageResId)
             findViewById<TextView>(R.id.detail_name).text = it.name
-            findViewById<SeekBar>(R.id.detail_rating_seekbar).progress = it.rating
-            findViewById<TextView>(R.id.detail_attribute).text = it.attributes.toString()
+            findViewById<RatingBar>(R.id.detail_rating).rating = it.rating.toFloat()
+            findViewById<TextView>(R.id.detail_attribute).text = it.attributes.joinToString(", ") // Show only selected attributes
             findViewById<TextView>(R.id.detail_price).text = "${it.price} credits"
 
             Log.d(TAG, "Item displayed: ${it.name} with rating: ${it.rating}")

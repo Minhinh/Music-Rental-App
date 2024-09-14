@@ -6,8 +6,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
-import android.widget.SeekBar
+import android.widget.RatingBar
 import android.widget.TextView
+import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -18,51 +19,44 @@ import com.google.android.material.snackbar.Snackbar
 class MainActivity : AppCompatActivity() {
 
     private val TAG = "MainActivity"
-    private lateinit var detailActivityLauncher: ActivityResultLauncher<Intent>
-
     private val items = listOf(
-        Item("Guitar", 5, listOf("Acoustic", "Electric"), 100, R.drawable.guitar),
-        Item("Drum Kit", 4, listOf("Electronic", "Acoustic"), 150, R.drawable.drum),
-        Item("Piano", 5, listOf("Grand", "Digital"), 200, R.drawable.piano),
-        Item("Violin", 3, listOf("Electric", "Classical"), 120, R.drawable.violin)
+        Item("Guitar", 5, listOf("Acoustic", "Electric", "Wood"), 100, R.drawable.guitar),
+        Item("Drum Kit", 4, listOf("Electronic", "Acoustic", "Wood"), 150, R.drawable.drum),
+        Item("Piano", 5, listOf("Grand", "Digital", "Wood"), 200, R.drawable.piano),
+        Item("Violin", 3, listOf("Electric", "Classical", "Wood"), 120, R.drawable.violin)
     )
 
     private var currentIndex = 0
+
+    // Declare the ActivityResultLauncher
+    private lateinit var detailActivityLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Register ActivityResultLauncher for DetailActivity for no depreciated
-        detailActivityLauncher = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
-        ) { result ->
+        Log.i(TAG, "MainActivity started, displaying items")
+        updateUI()
+
+        // Initialize the ActivityResultLauncher
+        detailActivityLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == RESULT_OK) {
                 val message = result.data?.getStringExtra("result_message")
                 message?.let {
-                    Log.i(TAG, "Received result: $it")
-                    Snackbar.make(findViewById(android.R.id.content), it, Snackbar.LENGTH_LONG).show()
-                }
-            } else if (result.resultCode == RESULT_CANCELED) {
-                val message = result.data?.getStringExtra("result_message")
-                message?.let {
-                    Log.i(TAG, "Received cancellation: $it")
-                    Snackbar.make(findViewById(android.R.id.content), it, Snackbar.LENGTH_LONG).show()
+                    Log.i(TAG, "Displaying result message: $message")
+                    Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG).show()
                 }
             }
         }
-
-        Log.i(TAG, "MainActivity started, displaying items")
-        updateUI()
     }
 
     private fun updateUI() {
         val item = items[currentIndex]
         findViewById<ImageView>(R.id.item_image).setImageResource(item.imageResId)
         findViewById<TextView>(R.id.item_name).text = item.name
-        findViewById<SeekBar>(R.id.item_rating_seekbar).progress = item.rating
+        findViewById<RatingBar>(R.id.item_rating).rating = item.rating.toFloat()
 
-        // Set Chips for multi-choice attributes
+        // Set the Chips for multi-choice attributes
         val chipGroup = findViewById<ChipGroup>(R.id.item_attribute_chipgroup)
         chipGroup.removeAllViews()  // Clear previous chips
         item.attributes.forEach { attribute ->
@@ -79,7 +73,7 @@ class MainActivity : AppCompatActivity() {
 
     fun onBorrowClicked(view: View) {
         val item = items[currentIndex]
-        val currentRating = findViewById<SeekBar>(R.id.item_rating_seekbar).progress
+        val currentRating = findViewById<RatingBar>(R.id.item_rating).rating.toInt()
 
         // Get the selected attributes from ChipGroup
         val selectedAttributes = mutableListOf<String>()
@@ -105,9 +99,8 @@ class MainActivity : AppCompatActivity() {
 
         Log.d(TAG, "Borrow clicked for ${item.name} with updated rating: $currentRating")
 
-        val updatedItem = item.copy(rating = currentRating)
+        val updatedItem = item.copy(rating = currentRating, attributes = selectedAttributes) // Pass only selected attributes
 
-        // Launch DetailActivity with updated item using ActivityResultLauncher
         val intent = Intent(this, DetailActivity::class.java).apply {
             putExtra("item_key", updatedItem)
         }
