@@ -1,15 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Define text appearance style -->
-    <style name="TextStyle">
-        <item name="android:textSize">18sp</item>
-        <item name="android:textColor">#333333</item>
+    <!-- App base theme -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorAccent">@color/accentColor</item>
+        <item name="android:windowBackground">@color/backgroundLight</item>
     </style>
 
-    <!-- Define another style for text headers -->
+    <!-- Header Text Style -->
     <style name="HeaderTextStyle">
-        <item name="android:textSize">22sp</item>
-        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:background">#3F51B5</item>
+        <item name="android:padding">8dp</item>
+    </style>
+
+    <!-- General Text Style -->
+    <style name="TextStyle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/textSecondary</item>
+    </style>
+
+    <!-- Button Style -->
+    <style name="ButtonStyle">
+        <item name="android:backgroundTint">@color/buttonColor</item>
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
+    <!-- Chip Style -->
+    <style name="ChipStyle">
+        <item name="chipBackgroundColor">@color/chipSelected</item>
+        <item name="android:textColor">@color/textSecondary</item>
     </style>
 </resources>
