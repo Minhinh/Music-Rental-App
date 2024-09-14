@@ -7,7 +7,7 @@ android:background="@color/backgroundLight">
 <ImageView
     android:id="@+id/detail_image"
     android:layout_width="wrap_content"
-    android:layout_height="200dp"
+    android:layout_height="400dp"
     android:contentDescription="@string/item_image"
     android:src="@drawable/piano"
     android:layout_marginBottom="16dp" />
@@ -36,7 +36,7 @@ android:background="@color/backgroundLight">
     android:layout_height="wrap_content"
     android:layout_below="@id/detail_rating"
     android:layout_centerHorizontal="true"
-    android:textSize="16sp" />
+    android:textSize="25sp" />
 
 <TextView
     android:id="@+id/detail_price"
@@ -61,7 +61,7 @@ android:background="@color/backgroundLight">
         style="@style/ButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save"
+        android:text="@string/save"
         android:onClick="onSaveClicked" />
 
     <Button
@@ -70,7 +70,7 @@ android:background="@color/backgroundLight">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Cancel"
+        android:text="@string/cancel"
         android:onClick="onCancelClicked" />
 </LinearLayout>
 </RelativeLayout>
