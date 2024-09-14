@@ -1,84 +1,76 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:padding="16dp"
+android:background="@color/backgroundLight">
 
-    <ImageView
-        android:id="@+id/detail_image"
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        android:contentDescription="@string/item_image"
-        android:src="@drawable/piano" />
+<ImageView
+    android:id="@+id/detail_image"
+    android:layout_width="wrap_content"
+    android:layout_height="200dp"
+    android:contentDescription="@string/item_image"
+    android:src="@drawable/piano"
+    android:layout_marginBottom="16dp" />
 
-    <TextView
-        android:id="@+id/detail_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/detail_image"
-        android:layout_centerHorizontal="true"
-        android:textSize="18sp" />
+<TextView
+    android:id="@+id/detail_name"
+    style="@style/HeaderTextStyle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/detail_image"
+    android:layout_centerHorizontal="true"
+    android:padding="8dp" />
 
-    <RatingBar
-        android:id="@+id/detail_rating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/detail_name"
-        android:layout_centerHorizontal="true"
-        android:numStars="5"
-        android:rating="0" />
+<RatingBar
+    android:id="@+id/detail_rating"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/detail_name"
+    android:layout_centerHorizontal="true"
+    android:numStars="5"
+    android:rating="0"
+    android:layout_marginTop="8dp" />
+<TextView
+    android:id="@+id/detail_attribute"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/detail_rating"
+    android:layout_centerHorizontal="true"
+    android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/detail_attribute"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/detail_rating"
-        android:layout_centerHorizontal="true"
-        android:textSize="16sp" />
+<TextView
+    android:id="@+id/detail_price"
+    style="@style/TextStyle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/detail_attribute"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="8dp" />
 
-    <TextView
-        android:id="@+id/detail_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/detail_attribute"
-        android:layout_centerHorizontal="true"
-        android:textSize="16sp" />
+<!-- Buttons placed underneath the content -->
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/detail_price"
+    android:layout_centerHorizontal="true"
+    android:orientation="horizontal"
+    android:layout_marginTop="16dp">
 
     <Button
         android:id="@+id/save_button"
+        style="@style/ButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:text="Save"
         android:onClick="onSaveClicked" />
 
     <Button
         android:id="@+id/cancel_button"
+        style="@style/ButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@id/save_button"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         android:text="Cancel"
         android:onClick="onCancelClicked" />
-
-    <SeekBar
-        android:id="@+id/detail_rating_seekbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:max="10"
-        android:progress="5" />
-    <TextView
-        android:id="@+id/item_name"
-        style="@style/HeaderTextStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/item_price"
-        style="@style/TextStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-
+</LinearLayout>
 </RelativeLayout>

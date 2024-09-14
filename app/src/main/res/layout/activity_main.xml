@@ -1,7 +1,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp"
+    android:background="@color/backgroundLight">
 
     <ImageView
         android:id="@+id/item_image"
@@ -9,7 +11,8 @@
         android:layout_height="200dp"
         android:layout_centerHorizontal="true"
         android:contentDescription="@string/item_image"
-        android:src="@drawable/guitar" />
+        android:src="@drawable/guitar"
+        android:layout_marginBottom="16dp" />
 
     <TextView
         android:id="@+id/item_name"
@@ -18,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/item_image"
         android:layout_centerHorizontal="true"
-        android:textSize="18sp" />
+        android:padding="8dp" />
 
     <RatingBar
         android:id="@+id/item_rating"
@@ -27,56 +30,54 @@
         android:layout_below="@id/item_name"
         android:layout_centerHorizontal="true"
         android:numStars="5"
-        android:rating="0" />
-
-    <TextView
-        android:id="@+id/item_attribute"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/item_rating"
-        android:layout_centerHorizontal="true"
-        android:textSize="16sp" />
+        android:rating="0"
+        android:layout_marginTop="8dp" />
 
     <TextView
         android:id="@+id/item_price"
         style="@style/TextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/item_attribute"
+        android:layout_below="@id/item_rating"
         android:layout_centerHorizontal="true"
-        android:textSize="16sp" />
+        android:layout_marginTop="8dp" />
 
-    <Button
-        android:id="@+id/borrow_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/item_price"
-        android:layout_centerHorizontal="true"
-        android:text="Borrow"
-        android:onClick="onBorrowClicked" />
-
-    <Button
-        android:id="@+id/next_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="Next"
-        android:onClick="onNextClicked" />
-    <!-- This is a comment -->
-    <SeekBar
-        android:id="@+id/item_rating_seekbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:max="10"
-        android:progress="5" />
+    <!-- ChipGroup with attributes positioned under item price -->
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/item_attribute_chipgroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/item_price"
+        android:layout_centerHorizontal="true"
         app:singleLine="false"
         app:selectionRequired="false"
         app:singleSelection="false"
         android:layout_marginTop="16dp" />
+
+    <!-- Buttons placed underneath content -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/item_attribute_chipgroup"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <Button
+            android:id="@+id/borrow_button"
+            style="@style/ButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Borrow"
+            android:onClick="onBorrowClicked" />
+
+        <Button
+            android:id="@+id/next_button"
+            style="@style/ButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Next"
+            android:onClick="onNextClicked"
+            android:layout_marginStart="16dp"/>
+    </LinearLayout>
 </RelativeLayout>
