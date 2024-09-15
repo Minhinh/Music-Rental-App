@@ -19,6 +19,7 @@ import com.google.android.material.snackbar.Snackbar
 class MainActivity : AppCompatActivity() {
 
     private val TAG = "MainActivity"
+    // Listing all the items for the list, can be added more.
     private val items = listOf(
         Item("Guitar", 5, listOf("Acoustic", "Electric", "Wood"), 100, R.drawable.guitar),
         Item("Drum Kit", 4, listOf("Electronic", "Acoustic", "Wood"), 150, R.drawable.drum),
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        // Log the start of the MainActivity
         Log.i(TAG, "MainActivity started, displaying items")
         updateUI()
 
@@ -67,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         findViewById<TextView>(R.id.item_price).text = "${item.price} credits"
-
+        // Log for debuting values
         Log.d(TAG, "Current item displayed: ${item.name}")
     }
 
@@ -90,13 +91,7 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(view, "Please select at least one attribute.", Snackbar.LENGTH_SHORT).show()
             return
         }
-
-        // Error checking: Check credit limit (for simplicity, let's assume 500 credits are available)
-        if (item.price > 500) {
-            Snackbar.make(view, "You do not have enough credits.", Snackbar.LENGTH_SHORT).show()
-            return
-        }
-
+        // Debugging Item name value
         Log.d(TAG, "Borrow clicked for ${item.name} with updated rating: $currentRating")
 
         val updatedItem = item.copy(rating = currentRating, attributes = selectedAttributes) // Pass only selected attributes

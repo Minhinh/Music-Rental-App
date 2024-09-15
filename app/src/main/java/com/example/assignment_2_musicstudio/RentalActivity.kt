@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 data class Item(
     val name: String,
     val rating: Int,
-    val attributes: List<String>,  // Changed to list for multi-choice
+    val attributes: List<String>,  // Create List of attributes
     val price: Int,
     val imageResId: Int
 ) : Parcelable

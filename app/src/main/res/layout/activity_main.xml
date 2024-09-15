@@ -5,6 +5,7 @@
     android:padding="16dp"
     android:background="@color/backgroundLight">
 
+    <!-- Image at the top content -->
     <ImageView
         android:id="@+id/item_image"
         android:layout_width="wrap_content"
@@ -14,6 +15,7 @@
         android:src="@drawable/guitar"
         android:layout_marginBottom="16dp" />
 
+    <!-- item Name beneath image -->
     <TextView
         android:id="@+id/item_name"
         style="@style/HeaderTextStyle"
@@ -23,6 +25,7 @@
         android:layout_centerHorizontal="true"
         android:padding="8dp" />
 
+    <!-- Rating Star below item name -->
     <RatingBar
         android:id="@+id/item_rating"
         android:layout_width="wrap_content"
@@ -33,6 +36,7 @@
         android:rating="0"
         android:layout_marginTop="8dp" />
 
+    <!-- Price in credit -->
     <TextView
         android:id="@+id/item_price"
         style="@style/TextStyle"

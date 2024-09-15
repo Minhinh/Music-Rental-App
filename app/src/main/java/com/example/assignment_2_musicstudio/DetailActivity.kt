@@ -21,7 +21,7 @@ class DetailActivity : AppCompatActivity() {
         Log.i(TAG, "DetailActivity started")
 
         val item: Item? = intent.getParcelableExtra("item_key", Item::class.java)
-
+        // If the item is available with ?
         item?.let {
             findViewById<ImageView>(R.id.detail_image).setImageResource(it.imageResId)
             findViewById<TextView>(R.id.detail_name).text = it.name
@@ -32,7 +32,7 @@ class DetailActivity : AppCompatActivity() {
             Log.d(TAG, "Item displayed: ${it.name} with rating: ${it.rating}")
         }
     }
-
+    //   save clicked, booking confirmed
     fun onSaveClicked(view: View) {
         Log.i(TAG, "Save clicked, booking confirmed")
 
@@ -44,7 +44,7 @@ class DetailActivity : AppCompatActivity() {
 
         finish()  // Close the activity and return to the main screen
     }
-
+    //   cancel clicked, booking cancelled
     fun onCancelClicked(view: View) {
         Log.i(TAG, "Cancel clicked, booking cancelled")
 
