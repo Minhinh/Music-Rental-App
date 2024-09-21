@@ -5,4 +5,9 @@
     <string name="next">Next</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
+    <string name="_0_credits">0 credits</string>
+    <string name="borrow_for_0_days">Borrow for 0 days</string>
+    <string name="condition">Condition:</string>
+    <string name="used">Used</string>
+    <string name="neww">New</string>
 </resources>
