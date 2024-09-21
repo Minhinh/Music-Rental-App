@@ -5,17 +5,17 @@
     android:padding="16dp"
     android:background="@color/backgroundLight">
 
-    <!-- Image at the top content -->
+    <!-- Image at the top -->
     <ImageView
         android:id="@+id/item_image"
         android:layout_width="wrap_content"
         android:layout_height="400dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
         android:contentDescription="@string/item_image"
-        android:src="@drawable/guitar"
-        android:layout_marginBottom="16dp" />
+        android:src="@drawable/guitar" />
 
-    <!-- item Name beneath image -->
+    <!-- Item Name beneath image -->
     <TextView
         android:id="@+id/item_name"
         style="@style/HeaderTextStyle"
@@ -36,7 +36,7 @@
         android:rating="0"
         android:layout_marginTop="8dp" />
 
-    <!-- Price in credit -->
+    <!-- Price in credits -->
     <TextView
         android:id="@+id/item_price"
         style="@style/TextStyle"
@@ -51,22 +51,44 @@
         android:id="@+id/item_attribute_chipgroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/TextStyle"
         android:layout_below="@id/item_price"
         android:layout_centerHorizontal="true"
         app:singleLine="false"
         app:selectionRequired="false"
         app:singleSelection="false"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="8dp" />
 
-    <!-- Buttons placed underneath content -->
-    <LinearLayout
+    <!-- RadioGroup for New/Used selection -->
+    <RadioGroup
+        android:id="@+id/radioGroupCondition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/item_attribute_chipgroup"
         android:layout_centerHorizontal="true"
         android:orientation="horizontal"
-        android:layout_marginTop="16dp">
+        android:layout_marginTop="8dp">
+
+        <RadioButton
+            android:id="@+id/radio_used"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/used" />
+
+        <RadioButton
+            android:id="@+id/radio_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/neww" />
+    </RadioGroup>
+
+    <!-- Buttons placed underneath content -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/radioGroupCondition"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+       >
 
         <Button
             android:id="@+id/borrow_button"
@@ -82,7 +104,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/next"
-            android:onClick="onNextClicked"
-            android:layout_marginStart="16dp"/>
+            android:onClick="onNextClicked"/>
     </LinearLayout>
 </RelativeLayout>

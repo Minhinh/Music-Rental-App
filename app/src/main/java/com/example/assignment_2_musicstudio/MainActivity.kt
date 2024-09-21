@@ -5,9 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.ImageView
-import android.widget.RatingBar
-import android.widget.TextView
+import android.widget.*
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -19,6 +17,9 @@ import com.google.android.material.snackbar.Snackbar
 class MainActivity : AppCompatActivity() {
 
     private val TAG = "MainActivity"
+    private var instrumentCondition = "Used"  // Default condition is "Used"
+    private var rentalDays = 0
+
     // Listing all the items for the list, can be added more.
     private val items = listOf(
         Item("Guitar", 5, listOf("Acoustic", "Electric", "Wood"), 100, R.drawable.guitar),
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         // Log the start of the MainActivity
         Log.i(TAG, "MainActivity started, displaying items")
         updateUI()
@@ -42,12 +44,33 @@ class MainActivity : AppCompatActivity() {
         // Initialize the ActivityResultLauncher
         detailActivityLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == RESULT_OK) {
+                val returnedPrice = result.data?.getIntExtra("price", 0) ?: 0
+                rentalDays = result.data?.getIntExtra("rental_days", 0) ?: 0
+                val message = result.data?.getStringExtra("result_message")
+
+                // Update the price TextView in MainActivity with the returned price and rental days
+                findViewById<TextView>(R.id.item_price).text = "$returnedPrice credits for $rentalDays days"
+
+                message?.let {
+                    Snackbar.make(findViewById(android.R.id.content), it, Snackbar.LENGTH_LONG).show()
+                }
+            } else if (result.resultCode == RESULT_CANCELED) {
                 val message = result.data?.getStringExtra("result_message")
                 message?.let {
-                    Log.i(TAG, "Displaying result message: $message")
-                    Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(findViewById(android.R.id.content), it, Snackbar.LENGTH_LONG).show()
                 }
             }
+        }
+
+        // Handle RadioGroup for Used/New condition
+        val radioGroupCondition = findViewById<RadioGroup>(R.id.radioGroupCondition)
+        radioGroupCondition.setOnCheckedChangeListener { group, checkedId ->
+            instrumentCondition = when (checkedId) {
+                R.id.radio_used -> "Used"
+                R.id.radio_new -> "New"
+                else -> "Used"
+            }
+            Log.d(TAG, "Instrument condition selected: $instrumentCondition")
         }
     }
 
@@ -68,11 +91,24 @@ class MainActivity : AppCompatActivity() {
         }
 
         findViewById<TextView>(R.id.item_price).text = "${item.price} credits"
-        // Log for debuting values
+        // Log for debugging values
         Log.d(TAG, "Current item displayed: ${item.name}")
     }
 
     fun onBorrowClicked(view: View) {
+        val radioGroupCondition = findViewById<RadioGroup>(R.id.radioGroupCondition)
+        val selectedConditionId = radioGroupCondition.checkedRadioButtonId
+
+        // Validation to check if a condition is selected
+        if (selectedConditionId == -1) {
+            // No option selected, show error message
+            Snackbar.make(view, "Please select 'Used' or 'New' condition.", Snackbar.LENGTH_SHORT).show()
+            return
+        }
+
+        // Get the selected condition (Used or New)
+        val selectedCondition = findViewById<RadioButton>(selectedConditionId).text.toString()
+
         val item = items[currentIndex]
         val currentRating = findViewById<RatingBar>(R.id.item_rating).rating.toInt()
 
@@ -91,18 +127,19 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(view, "Please select at least one attribute.", Snackbar.LENGTH_SHORT).show()
             return
         }
-        // Debugging Item name value
-        Log.d(TAG, "Borrow clicked for ${item.name} with updated rating: $currentRating")
 
-        val updatedItem = item.copy(rating = currentRating, attributes = selectedAttributes) // Pass only selected attributes
+        val updatedItem = item.copy(rating = currentRating, attributes = selectedAttributes)  // Pass only selected attributes
 
         val intent = Intent(this, DetailActivity::class.java).apply {
             putExtra("item_key", updatedItem)
+            putExtra("condition", selectedCondition)  // Pass the condition (Used/New)
+            putExtra("rental_days", rentalDays)  // Pass the rental days
         }
         detailActivityLauncher.launch(intent)
 
-        Log.i(TAG, "Navigated to DetailActivity with item: ${item.name}")
+        Log.i(TAG, "Navigated to DetailActivity with item: ${item.name}, condition: $selectedCondition")
     }
+
 
     fun onNextClicked(view: View) {
         currentIndex = (currentIndex + 1) % items.size

@@ -1,82 +1,113 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:padding="16dp"
-android:background="@color/backgroundLight">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundLight">
 
     <!-- Detail Image at the top -->
-<ImageView
-    android:id="@+id/detail_image"
-    android:layout_width="wrap_content"
-    android:layout_height="400dp"
-    android:contentDescription="@string/item_image"
-    android:src="@drawable/piano"
-    android:layout_marginBottom="16dp" />
+    <ImageView
+        android:id="@+id/detail_image"
+        android:layout_width="wrap_content"
+        android:layout_height="400dp"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/item_image"
+        android:src="@drawable/piano"
+        android:layout_marginBottom="6dp" />
 
     <!-- Name of the instrument -->
-<TextView
-    android:id="@+id/detail_name"
-    style="@style/HeaderTextStyle"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_below="@id/detail_image"
-    android:layout_centerHorizontal="true"
-    android:padding="8dp" />
+    <TextView
+        android:id="@+id/detail_name"
+        style="@style/HeaderTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/detail_image"
+        android:layout_centerHorizontal="true"
+        android:padding="6dp" />
 
     <!-- Rating Star of 5 -->
-<RatingBar
-    android:id="@+id/detail_rating"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_below="@id/detail_name"
-    android:layout_centerHorizontal="true"
-    android:numStars="5"
-    android:rating="0"
-    android:layout_marginTop="8dp" />
+    <RatingBar
+        android:id="@+id/detail_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/detail_name"
+        android:layout_centerHorizontal="true"
+        android:numStars="5"
+        android:rating="0"
+        android:layout_marginTop="6dp" />
 
     <!-- Attributes of the instrument -->
-<TextView
-    android:id="@+id/detail_attribute"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_below="@id/detail_rating"
-    android:layout_centerHorizontal="true"
-    android:textSize="25sp" />
+    <TextView
+        android:id="@+id/detail_attribute"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/detail_rating"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp" />
+
+    <!-- Full-width SeekBar for rental days and price -->
+    <SeekBar
+        android:id="@+id/detail_seekbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="7"
+        android:layout_below="@id/detail_attribute"
+        android:layout_marginTop="8dp" />
+
+    <!-- TextView for showing credits based on SeekBar progress -->
+    <TextView
+        android:id="@+id/detail_seekbar_value"
+        style="@style/TextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_0_credits"
+        android:layout_below="@id/detail_seekbar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp" />
 
     <!-- Price of the instrument -->
-<TextView
-    android:id="@+id/detail_price"
-    style="@style/TextStyle"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_below="@id/detail_attribute"
-    android:layout_centerHorizontal="true"
-    android:layout_marginTop="8dp" />
-
-<!-- Buttons placed underneath the content -->
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_below="@id/detail_price"
-    android:layout_centerHorizontal="true"
-    android:orientation="horizontal"
-    android:layout_marginTop="16dp">
-
-    <Button
-        android:id="@+id/save_button"
-        style="@style/ButtonStyle"
+    <TextView
+        android:id="@+id/detail_price"
+        style="@style/TextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/save"
-        android:onClick="onSaveClicked" />
+        android:layout_below="@id/detail_seekbar_value"
+        android:layout_centerHorizontal="true"
+        android:text="@string/borrow_for_0_days"
+        android:layout_marginTop="8dp" />
 
-    <Button
-        android:id="@+id/cancel_button"
-        style="@style/ButtonStyle"
+    <TextView
+        android:id="@+id/detail_condition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="@string/cancel"
-        android:onClick="onCancelClicked" />
-</LinearLayout>
+        android:layout_below="@id/detail_price"
+        android:text="@string/condition"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Button to select Date and Time -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/detail_condition"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <Button
+            android:id="@+id/save_button"
+            style="@style/ButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/save"
+            android:onClick="onSaveClicked" />
+
+        <Button
+            android:id="@+id/cancel_button"
+            style="@style/ButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/cancel"
+            android:onClick="onCancelClicked" />
+    </LinearLayout>
 </RelativeLayout>
