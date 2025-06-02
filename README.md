@@ -20,10 +20,6 @@ This is a proof-of-concept Android application designed for a music studio that 
 - XML Layouts
 - Parcelable for data passing
 
-## Screenshots
-
-(You can add screenshots here to give a visual representation of the app.)
-
 ## Layouts
 
 ### Main Activity Layout
