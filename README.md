@@ -18,7 +18,15 @@ This is a proof-of-concept Android application designed for a music studio that 
 - Kotlin
 - Android SDK
 - XML Layouts
+- Components of Intent
+- Multi-Choice Widget using Chips
+- State Persistence
 - Parcelable for data passing
+
+## Tesing and Debug
+
+- Espresso
+- Logcat .d .i .o
 
 ## Layouts
 
